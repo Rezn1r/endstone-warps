@@ -19,3 +19,15 @@
 - [`5738eda`](https://github.com/Rezn1r/endstone-warps/commit/5738eda11e0df7a9c5bd7419ff52a30f3f4d8a26): Add database initialization and cleanup in Warps plugin
 
 - [`20b4099`](https://github.com/Rezn1r/endstone-warps/commit/20b4099f4a25dc9a633efe232682d4b9f3301ba9): Implement warp management features including saving, deleting, and listing warps
+
+- [`8bd6bc5`](https://github.com/Rezn1r/endstone-warps/commit/8bd6bc54d02cd813f881e612881461827d23b7f9): Add GitHub Actions workflows for build, lint, and release processes
+
+- [`9eca573`](https://github.com/Rezn1r/endstone-warps/commit/9eca573166f02488fe19ad2c1b0a7318d8dc5ef0): Correct install command in GitHub Actions workflow
+
+- [`336da61`](https://github.com/Rezn1r/endstone-warps/commit/336da6174f16fe2a0fc2182bb7c1910a7f6bd9d6): Update Python version matrix in lint workflow
+
+- [`24257ca`](https://github.com/Rezn1r/endstone-warps/commit/24257ca04c9fec9443e6092426cdf466c19c65f6): Update Python version matrix in build workflow and enhance README formatting
+
+- [`f778827`](https://github.com/Rezn1r/endstone-warps/commit/f778827ed9914a65679dc87dbe730595a68abb76): Add release workflow for versioning
+
+- [`12e37c2`](https://github.com/Rezn1r/endstone-warps/commit/12e37c2d0eef2b4dd190b2a28dfed7c360fb3284): Enhance README with detailed installation, configuration, commands, and building instructions
