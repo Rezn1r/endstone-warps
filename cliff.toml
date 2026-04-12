@@ -11,9 +11,9 @@ body = """
 {% else %}
     ## [Unreleased]
 {% endif %}
-{% for commit in commits %}
-- [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/Rezn1r/endstone-warps/commit/{{ commit.id }}): {% if commit.breaking %}**BREAKING** {% endif %}{{ commit.message | upper_first }}
-{% endfor %}
+{%- for commit in commits %}
+[`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/Rezn1r/endstone-warps/commit/{{ commit.id }}): {% if commit.breaking %}**BREAKING** {% endif %}{{ commit.message | split(pat="\n") | first | trim | upper_first }}
+{%- endfor %}
 """
 # Remove leading and trailing whitespaces from the changelog's body.
 trim = true
