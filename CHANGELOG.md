@@ -1,6 +1,4 @@
 
-## [Unreleased]
-
 ## [1.0.0] - 2026-04-12
 
 
@@ -33,3 +31,9 @@
 - [`f778827`](https://github.com/Rezn1r/endstone-warps/commit/f778827ed9914a65679dc87dbe730595a68abb76): Add release workflow for versioning
 
 - [`12e37c2`](https://github.com/Rezn1r/endstone-warps/commit/12e37c2d0eef2b4dd190b2a28dfed7c360fb3284): Enhance README with detailed installation, configuration, commands, and building instructions
+
+- [`4e30e35`](https://github.com/Rezn1r/endstone-warps/commit/4e30e35f073692fd8d21728d8b171035966b4897): Update CHANGELOG
+
+- [`bfe616c`](https://github.com/Rezn1r/endstone-warps/commit/bfe616c1c706930e32de509b98514715d8e0124a): Adjust README formatting for badges alignment
+
+- [`72d0173`](https://github.com/Rezn1r/endstone-warps/commit/72d017367882c30832e1b72be227c9a2d980cfcc): Correct install command in release workflow
