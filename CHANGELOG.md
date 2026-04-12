@@ -1,6 +1,8 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-04-12
+
 
 - [`0c66c98`](https://github.com/Rezn1r/endstone-warps/commit/0c66c9880032cbfad88571ad8acf7f1a0d44a253): Made plugin shell, nothing functional yet
 
