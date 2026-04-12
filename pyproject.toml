@@ -16,4 +16,4 @@ dev = [
 ]
 
 [project.entry-points."endstone"]
-eauth-me = "endstone_warps:Warps"
+warps = "endstone_warps:Warps"
