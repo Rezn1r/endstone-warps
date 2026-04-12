@@ -1,13 +1,23 @@
 <div align="center">
   <a href="https://github.com/EndstoneMC/endstone/releases">
-    <img src="https://minecraft.wiki/images/Warped_Hyphae_%28UD%29_JE1_BE1.gif" width="160" height="160" >
+    <img src="https://minecraft.wiki/images/Warped_Hyphae_%28UD%29_JE1_BE1.gif" width="160" height="160">
   </a>
 
   <h2>Warps</h2>
   <p><b>A lightweight warp plugin for Endstone.</b></p>
-  [![Lint](https://github.com/Rezn1r/endstone-warps/actions/workflows/lint.yml/badge.svg)](https://github.com/Rezn1r/endstone-warps/actions/workflows/lint.yml)
-  [![Build](https://github.com/Rezn1r/endstone-warps/actions/workflows/build.yml/badge.svg)](https://github.com/Rezn1r/endstone-warps/actions/workflows/build.yml)
-  [![Release](https://github.com/Rezn1r/endstone-warps/actions/workflows/release.yml/badge.svg)](https://github.com/Rezn1r/endstone-warps/actions/workflows/release.yml)
+</div>
+
+<p align="center">
+  <a href="https://github.com/Rezn1r/endstone-warps/actions/workflows/lint.yml">
+    <img src="https://github.com/Rezn1r/endstone-warps/actions/workflows/lint.yml/badge.svg">
+  </a>
+  <a href="https://github.com/Rezn1r/endstone-warps/actions/workflows/build.yml">
+    <img src="https://github.com/Rezn1r/endstone-warps/actions/workflows/build.yml/badge.svg">
+  </a>
+  <a href="https://github.com/Rezn1r/endstone-warps/actions/workflows/release.yml">
+    <img src="https://github.com/Rezn1r/endstone-warps/actions/workflows/release.yml/badge.svg">
+  </a>
+</p>
 </div>
 
 <h3>Installation</h3>
