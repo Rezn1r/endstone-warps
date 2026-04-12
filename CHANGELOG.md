@@ -1,6 +1,8 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-04-12
+
 
 - [`c0729dd`](https://github.com/Rezn1r/endstone-warps/commit/c0729dd0aea20d1430b0e41d1f4680ce40a0bf21): Update CHANGELOG to reflect recent changes and fixes
 
