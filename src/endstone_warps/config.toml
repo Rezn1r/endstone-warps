@@ -1,3 +1,10 @@
 [database]
+# Database configuration
 type = "sqlite"
 name = "warps.db"
+
+[warp]
+# Countdown duration in seconds before teleporting
+countdown_duration = 3
+# Cooldown between warps in seconds
+cooldown_seconds = 5
