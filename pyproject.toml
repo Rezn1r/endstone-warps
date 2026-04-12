@@ -1,0 +1,19 @@
+[project]
+name = "endstone-warps"
+version = "1.0.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "endstone>=0.11.3",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.3.1",
+    "git-cliff>=2.12.0",
+    "ruff>=0.15.10",
+]
+
+[project.entry-points."endstone"]
+eauth-me = "endstone_warps:Warps"
