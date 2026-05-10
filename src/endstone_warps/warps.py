@@ -3,17 +3,23 @@ from time import time
 
 from endstone import ColorFormat, Player
 from endstone.command import Command, CommandSender
-from endstone._python.level import Location
 from endstone.plugin import Plugin
-from endstone_warps.database import delete_warp, get_warp, initialize_database, list_warps, save_warp
+from endstone.level import Location
+from endstone_warps.database import (
+    delete_warp,
+    get_warp,
+    initialize_database,
+    list_warps,
+    save_warp,
+)
 from endstone_warps.listener import WarpsListener
 from sqlalchemy.engine import Engine
 from typing_extensions import override
 
+
 class Warps(Plugin):
-    
     description = "A lightweight warp plugin for Endstone."
-    version = "1.0.1"
+    version = "1.0.2"
     api_version = "0.11"
     authors = ["Rezn1r"]
 
@@ -72,13 +78,14 @@ class Warps(Plugin):
         },
     }
 
-
     @override
     def on_load(self) -> None:
         """Called when the plugin is loaded. Use this for pre-setup tasks."""
 
         self._database_engine = initialize_database(self.data_folder)
-        self.logger.info(f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} is loading... (v{self.version})")
+        self.logger.info(
+            f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} is loading... (v{self.version})"
+        )
 
     @override
     def on_enable(self) -> None:
@@ -86,11 +93,15 @@ class Warps(Plugin):
 
         self.save_default_config()
         self.register_events(WarpsListener(self))
-        
+
         # Start countdown ticker (runs every 20 ticks = 1 second)
-        self.server.scheduler.run_task(self, self._tick_warp_countdowns, delay=20, period=20)
-        
-        self.logger.info(f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} has been enabled! (v{self.version})")
+        self.server.scheduler.run_task(
+            self, self._tick_warp_countdowns, delay=20, period=20
+        )
+
+        self.logger.info(
+            f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} has been enabled! (v{self.version})"
+        )
 
     @override
     def on_disable(self) -> None:
@@ -99,9 +110,13 @@ class Warps(Plugin):
         if self._database_engine is not None:
             self._database_engine.dispose()
             self._database_engine = None
-        self.logger.info(f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} has been disabled! (v{self.version})")
+        self.logger.info(
+            f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} has been disabled! (v{self.version})"
+        )
 
-    def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
+    def on_command(
+        self, sender: CommandSender, command: Command, args: list[str]
+    ) -> bool:
         match command.name:
             case "setwarp":
                 return self._handle_setwarp(sender, args)
@@ -123,16 +138,22 @@ class Warps(Plugin):
 
     def _handle_setwarp(self, sender: CommandSender, args: list[str]) -> bool:
         if not isinstance(sender, Player):
-            sender.send_message(f"{ColorFormat.RED}Only players can set warps.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Only players can set warps.{ColorFormat.RESET}"
+            )
             return True
 
         if len(args) != 1:
-            sender.send_message(f"{ColorFormat.RED}Usage: /setwarp <name>{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Usage: /setwarp <name>{ColorFormat.RESET}"
+            )
             return True
 
         warp_name = self._normalize_warp_name(args[0])
         if not warp_name:
-            sender.send_message(f"{ColorFormat.RED}Warp name cannot be empty.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Warp name cannot be empty.{ColorFormat.RESET}"
+            )
             return True
 
         location = sender.location
@@ -148,25 +169,33 @@ class Warps(Plugin):
             sender.name,
             int(time()),
         )
-        sender.send_message(f"{ColorFormat.GREEN}Warp '{warp_name}' set.{ColorFormat.RESET}")
+        sender.send_message(
+            f"{ColorFormat.GREEN}Warp '{warp_name}' set.{ColorFormat.RESET}"
+        )
         return True
 
     def _handle_warp(self, sender: CommandSender, args: list[str]) -> bool:
         if not isinstance(sender, Player):
-            sender.send_message(f"{ColorFormat.RED}Only players can use warps.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Only players can use warps.{ColorFormat.RESET}"
+            )
             return True
 
         if len(args) != 1:
-            sender.send_message(f"{ColorFormat.RED}Usage: /warp <name>{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Usage: /warp <name>{ColorFormat.RESET}"
+            )
             return True
 
         # Check cooldown
         cooldown_seconds = self.config.get("warp", {}).get("cooldown_seconds", 5)
         current_time = time()
         player_name = sender.name
-        
+
         if player_name in self.player_cooldowns:
-            time_left = cooldown_seconds - (current_time - self.player_cooldowns[player_name])
+            time_left = cooldown_seconds - (
+                current_time - self.player_cooldowns[player_name]
+            )
             if time_left > 0:
                 sender.send_message(
                     f"{ColorFormat.RED}You must wait {time_left:.1f}s before warping again.{ColorFormat.RESET}"
@@ -176,7 +205,9 @@ class Warps(Plugin):
         warp_name = self._normalize_warp_name(args[0])
         warp = get_warp(self._database(), warp_name)
         if warp is None:
-            sender.send_message(f"{ColorFormat.RED}Warp '{warp_name}' was not found.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Warp '{warp_name}' was not found.{ColorFormat.RESET}"
+            )
             return True
 
         dimension = sender.dimension.level.get_dimension(str(warp["world"]))
@@ -191,25 +222,35 @@ class Warps(Plugin):
 
         # Start warp countdown
         self._start_warp_countdown(sender, location, warp_name)
-        sender.send_message(f"{ColorFormat.YELLOW}Warp in progress... don't move!{ColorFormat.RESET}")
+        sender.send_message(
+            f"{ColorFormat.YELLOW}Warp in progress... don't move!{ColorFormat.RESET}"
+        )
         return True
 
     def _handle_delwarp(self, sender: CommandSender, args: list[str]) -> bool:
         if len(args) != 1:
-            sender.send_message(f"{ColorFormat.RED}Usage: /delwarp <name>{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Usage: /delwarp <name>{ColorFormat.RESET}"
+            )
             return True
 
         warp_name = self._normalize_warp_name(args[0])
         if not delete_warp(self._database(), warp_name):
-            sender.send_message(f"{ColorFormat.RED}Warp '{warp_name}' was not found.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Warp '{warp_name}' was not found.{ColorFormat.RESET}"
+            )
             return True
 
-        sender.send_message(f"{ColorFormat.GREEN}Warp '{warp_name}' deleted.{ColorFormat.RESET}")
+        sender.send_message(
+            f"{ColorFormat.GREEN}Warp '{warp_name}' deleted.{ColorFormat.RESET}"
+        )
         return True
 
     def _handle_listwarps(self, sender: CommandSender, args: list[str]) -> bool:
         if len(args) > 1:
-            sender.send_message(f"{ColorFormat.RED}Usage: /warps [page]{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Usage: /warps [page]{ColorFormat.RESET}"
+            )
             return True
 
         page = 1
@@ -217,18 +258,24 @@ class Warps(Plugin):
             try:
                 page = max(1, int(args[0]))
             except ValueError:
-                sender.send_message(f"{ColorFormat.RED}Page must be a number.{ColorFormat.RESET}")
+                sender.send_message(
+                    f"{ColorFormat.RED}Page must be a number.{ColorFormat.RESET}"
+                )
                 return True
 
         rows = list_warps(self._database())
         if not rows:
-            sender.send_message(f"{ColorFormat.YELLOW}No warps have been set yet.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.YELLOW}No warps have been set yet.{ColorFormat.RESET}"
+            )
             return True
 
         page_size = 10
         total_pages = max(1, ceil(len(rows) / page_size))
         if page > total_pages:
-            sender.send_message(f"{ColorFormat.RED}Page {page} does not exist. There are {total_pages} pages.{ColorFormat.RESET}")
+            sender.send_message(
+                f"{ColorFormat.RED}Page {page} does not exist. There are {total_pages} pages.{ColorFormat.RESET}"
+            )
             return True
 
         start = (page - 1) * page_size
@@ -239,12 +286,16 @@ class Warps(Plugin):
                 f"{ColorFormat.YELLOW}{row['uuid']}{ColorFormat.RESET} - {row['world']} ({row['x']:.2f}, {row['y']:.2f}, {row['z']:.2f})"
             )
 
-        sender.send_message(f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} page {page}/{total_pages}:")
+        sender.send_message(
+            f"{ColorFormat.MATERIAL_EMERALD}Warps{ColorFormat.RESET} page {page}/{total_pages}:"
+        )
         for line in lines:
             sender.send_message(line)
         return True
 
-    def _start_warp_countdown(self, player: Player, location: Location, warp_name: str) -> None:
+    def _start_warp_countdown(
+        self, player: Player, location: Location, warp_name: str
+    ) -> None:
         """Start a countdown before warping."""
         countdown_duration = self.config.get("warp", {}).get("countdown_duration", 3)
         player_name = player.name
@@ -308,13 +359,17 @@ class Warps(Plugin):
         )
 
         if not player.teleport(teleport_location):
-            player.send_message(f"{ColorFormat.RED}Failed to teleport to '{warp_name}'.{ColorFormat.RESET}")
+            player.send_message(
+                f"{ColorFormat.RED}Failed to teleport to '{warp_name}'.{ColorFormat.RESET}"
+            )
             return
 
         # Set cooldown
         self.player_cooldowns[player_name] = time()
 
-        player.send_message(f"{ColorFormat.GREEN}Teleported to '{warp_name}'.{ColorFormat.RESET}")
+        player.send_message(
+            f"{ColorFormat.GREEN}Teleported to '{warp_name}'.{ColorFormat.RESET}"
+        )
         player.send_tip(f"{ColorFormat.GREEN}Warped!{ColorFormat.RESET}")
 
     def _cancel_warp(self, player: Player) -> None:
@@ -326,5 +381,3 @@ class Warps(Plugin):
         self.warping_players.pop(player_name)
         player.send_message(f"{ColorFormat.RED}Warp cancelled!{ColorFormat.RESET}")
         player.send_tip(f"{ColorFormat.RED}Warp cancelled!{ColorFormat.RESET}")
-
-

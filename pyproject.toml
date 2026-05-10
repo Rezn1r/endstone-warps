@@ -1,7 +1,7 @@
 [project]
 name = "endstone-warps"
-version = "1.0.1"
-description = "Add your description here"
+version = "1.0.2"
+description = "A lightweight warp plugin for Endstone."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
