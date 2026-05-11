@@ -1,6 +1,10 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "endstone-warps"
-version = "1.0.3"
+version = "1.0.4"
 description = "A lightweight warp plugin for Endstone."
 readme = "README.md"
 requires-python = ">=3.13"
