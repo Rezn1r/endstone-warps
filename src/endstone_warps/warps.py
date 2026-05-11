@@ -19,7 +19,7 @@ from typing_extensions import override
 
 class Warps(Plugin):
     description = "A lightweight warp plugin for Endstone."
-    version = "1.0.2"
+    version = "1.0.3"
     api_version = "0.11"
     authors = ["Rezn1r"]
 
