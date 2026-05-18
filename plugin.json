@@ -1,7 +1,7 @@
 {
   "name": "endstone-warps",
   "version": "1.0.1",
-  "description": "A lightweight warp plugin for Endstone.",
+  "description": "A lightwei ght warp plugin for Endstone.",
   "api": [
     "^0.5.0"
   ],
