@@ -16,8 +16,6 @@ body = """
 {%- endfor %}
 """
 
-
-
 # Remove leading and trailing whitespaces from the changelog's body.
 trim = true
 # Render body even when there are no releases to process.
