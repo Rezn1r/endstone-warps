@@ -14,9 +14,7 @@
   <a href="https://github.com/Rezn1r/endstone-warps/actions/workflows/build.yml">
     <img src="https://github.com/Rezn1r/endstone-warps/actions/workflows/build.yml/badge.svg">
   </a>
-  <a href="https://github.com/Rezn1r/endstone-warps/actions/workflows/release.yml">
-    <img src="https://github.com/Rezn1r/endstone-warps/actions/workflows/release.yml/badge.svg">
-  </a>
+  
 </p>
 </div>
 
