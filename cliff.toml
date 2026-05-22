@@ -17,6 +17,8 @@ body = """
 [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/Rezn1r/endstone-warps/commit/{{ commit.id }}): {% if commit.breaking %}**BREAKING** {% endif %}{{ commit.message | split(pat="\n") | first | trim | upper_first }}
 {%- endfor %}
 """
+
+
 # Remove leading and trailing whitespaces from the changelog's body.
 trim = true
 # Render body even when there are no releases to process.
